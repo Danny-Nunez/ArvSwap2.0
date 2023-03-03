@@ -96,7 +96,7 @@ export default function App() {
     module: '#000000',
     outline: '#b500dc',
     container: '#010101',
-    dialog: '#FFF',
+    dialog: '#000',
     interactive: '#191919',
   }
   let darkMode = true

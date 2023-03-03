@@ -33,10 +33,10 @@ a {
   width: 24px;
 }
 .togglebutton {
-  margin-top: 10px;
+  margin-top: 15px;
   background-color: #ffffff00;
   border-radius: 50%;
-  padding: auto;
+  margin-left: -20px;
   border: none;
   cursor: pointer;
 }
@@ -59,7 +59,7 @@ a {
 }
 @media (max-width: 500px) {
   .headertitle {
-    margin-top: 5px;
+    margin-top: 0px;
   }
   .headertext {
     margin-bottom: -10px;
