@@ -93,6 +93,11 @@ export default function App() {
     accent: '#b500dc',
     primary: '#FFFFFF',
     secondary: '#888D9B',
+    module: '#000000',
+    outline: '#b500dc',
+    container: '#010101',
+    dialog: '#FFF',
+    interactive: '#191919',
   }
   let darkMode = true
 
