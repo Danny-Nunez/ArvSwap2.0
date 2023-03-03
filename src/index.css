@@ -44,7 +44,7 @@ a {
   font-weight: 900;
   font-size: 50px;
   margin-bottom: 50px;
-  margin-top: -20px;
+  margin-top: -10px;
 }
 .headertext {
   margin-top: -40px;
@@ -55,5 +55,13 @@ a {
   .headertitle {
     font-weight: 900;
     font-size: 30px;
+  }
+}
+@media (max-width: 500px) {
+  .headertitle {
+    margin-top: 5px;
+  }
+  .headertext {
+    margin-bottom: -10px;
   }
 }

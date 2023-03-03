@@ -59,7 +59,7 @@
   width: 364px;
   border-color: #ab48e0;
   border-style: solid;
-
+  background-color: black;
   box-shadow: 0 0 38px 8px #ab48e0;
 }
 
@@ -77,8 +77,5 @@
 
   .connectors {
     align-self: center;
-  }
-  .widget {
-    height: 362px;
   }
 }
