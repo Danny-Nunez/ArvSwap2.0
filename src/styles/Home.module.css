@@ -79,3 +79,8 @@
     align-self: center;
   }
 }
+@media (max-width: 500px) {
+  .widget {
+    margin-top: -10px;
+  }
+}
