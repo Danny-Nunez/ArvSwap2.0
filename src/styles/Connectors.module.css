@@ -39,3 +39,9 @@
     width: 360px;
   }
 }
+
+@media (max-width: 500px) {
+  .walletconnect-modal__footer {
+    width: 50%;
+  }
+}

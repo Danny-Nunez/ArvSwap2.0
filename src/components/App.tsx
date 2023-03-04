@@ -60,12 +60,11 @@ export default function App() {
   const onSelectLocale = useCallback((e) => setLocale(e.target.value), [])
   const [theme, setTheme] = useState('light')
   const [toggle, setToggle] = useState(false)
-  const [darkmode, setdarkmode] = useState(false)
 
   // const [myDarkTheme, setmyDarkTheme] = useState('true')
   const toggleTheme = () => {
     setToggle(!toggle)
-    setdarkmode(!darkmode)
+
     if (theme === 'light') {
       setTheme('dark')
     } else {
@@ -108,6 +107,7 @@ export default function App() {
           <button className="togglebutton" onClick={toggleTheme}>
             {toggle ? <img src={icon1} alt="icon1" /> : <img src={icon2} alt="icon2" />}
           </button>
+          {/* <button>{darkMode ? myDark : myLight}test</button> */}
         </div>
       </div>
       <div className={styles.i18n}>

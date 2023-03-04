@@ -65,3 +65,11 @@ a {
     margin-bottom: -10px;
   }
 }
+@media (max-width: 500px) {
+  .walletconnect-modal__footer {
+    padding-left: 200px;
+    padding-bottom: 18px;
+    overflow: scroll;
+    width: 260px;
+  }
+}
