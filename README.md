@@ -11,10 +11,6 @@ For mobile users the app comes with wallet connect. WalletConnect is an open-sou
 
 ![mobile uniswap](https://user-images.githubusercontent.com/114783191/222844521-46934a55-ffed-41fa-9fcd-d487c6cca58a.JPG)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a0ee9cfff193161e8c920692d5d45e85047f911f
 The @uniswap/widgets package is an npm package of React components used to provide subsets of the Uniswap Protocol functionality in a small and configurable user interface element.
 
 Uniswap Labs Swap Widget
