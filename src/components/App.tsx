@@ -13,6 +13,8 @@ import styles from '../styles/Home.module.css'
 import icon1 from './icon1.png'
 import icon2 from './icon2.png'
 
+
+
 // const TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 const TOKEN_LIST = [
   {
@@ -45,14 +47,15 @@ const TOKEN_LIST = [
 
 const ARV = '0x28fDA76721a8077A5dE802Ab0212849B8c38429E'
 
+
 export default function App() {
   // When a user clicks "Connect your wallet" in the SwapWidget, this callback focuses the connectors.
-  const connectors = useRef<HTMLDivElement>(null)
+  const connectors = useRef<HTMLDivElement>(null);
   const focusConnectors = useCallback(() => connectors.current?.focus(), [])
 
   // The provider to pass to the SwapWidget.
   // This is a Web3Provider (from @ethersproject) supplied by @web3-react; see ./connectors.ts.
-  const provider = useActiveProvider()
+  const provider = useActiveProvider();
 
   // The locale to pass to the SwapWidget.
   // This is a value from the SUPPORTED_LOCALES exported by @uniswap/widgets.
@@ -60,11 +63,22 @@ export default function App() {
   const onSelectLocale = useCallback((e) => setLocale(e.target.value), [])
   const [theme, setTheme] = useState('light')
   const [toggle, setToggle] = useState(false)
+  const [darkMode, setDarkMode] = useState(true);
+  const [connectedWalletAddress, setConnectedWalletAddress] = useState<string | null>(null);
 
-  // const [myDarkTheme, setmyDarkTheme] = useState('true')
+  useEffect(() => {
+    if (provider) {
+    provider.getSigner().getAddress().then((address: string) => {
+    setConnectedWalletAddress(address);
+    });
+    } else {
+    setConnectedWalletAddress(null);
+    }
+    }, [provider]);
+
   const toggleTheme = () => {
     setToggle(!toggle)
-
+    setDarkMode(!darkMode);
     if (theme === 'light') {
       setTheme('dark')
     } else {
@@ -98,7 +112,9 @@ export default function App() {
     dialog: '#000',
     interactive: '#191919',
   }
-  let darkMode = true
+
+  
+
 
   return (
     <div className={styles.container}>
@@ -107,7 +123,7 @@ export default function App() {
           <button className="togglebutton" onClick={toggleTheme}>
             {toggle ? <img src={icon1} alt="icon1" /> : <img src={icon2} alt="icon2" />}
           </button>
-          {/* <button>{darkMode ? myDark : myLight}test</button> */}
+          
         </div>
       </div>
       <div className={styles.i18n}>
@@ -125,6 +141,11 @@ export default function App() {
       <main className={styles.main}>
         <h1 className="headertitle">UniSwap 2.0</h1>
         <span className="headertext">Exchange ARV tokens in seconds</span>
+
+        {/* <div>
+  Connected wallet address: {account}
+</div> */}
+
         <div className={styles.demo}>
           <div className={styles.connectors} ref={connectors} tabIndex={-1}>
             <Web3Connectors />
@@ -139,11 +160,27 @@ export default function App() {
               onConnectWallet={focusConnectors}
               defaultInputTokenAddress="NATIVE"
               defaultInputAmount="1"
+              
               defaultOutputTokenAddress={ARV}
             />
           </div>
         </div>
+
+        <div>
+    {connectedWalletAddress && (
+      <div className={styles.walletAddress}>
+        Wallet Address: {connectedWalletAddress}
+      </div>
+    )}
+  </div>
+
       </main>
+      <div>
+      
+     
+     
+     
+    </div>
     </div>
   )
 }

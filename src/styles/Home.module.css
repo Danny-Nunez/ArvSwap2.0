@@ -42,15 +42,22 @@
 
 @keyframes spotlight {
   10% {
-    background-color: #ffffff;
+    background-color: #ad00f12a;
   }
   20% {
-    background-color: #ffffff;
+    background-color: #ad00f150;
   }
 }
-
+.widget-footer {
+  display: none;
+}
 .connectors:focus {
   animation: 2.5s ease-out 1 spotlight;
+}
+
+.walletAddress {
+  font-size: 12px;
+  padding-top: 5px;
 }
 
 .widget {
@@ -60,7 +67,18 @@
   border-color: #ab48e0;
   border-style: none;
   background-color: black;
-  box-shadow: 0 0 38px 8px #ab48e0;
+  /* box-shadow: 0 0 38px 8px #ab48e0; */
+  position: relative;
+  transform: translate(0);
+  transform-style: preserve-3d;
+}
+.widget:before {
+  content:"";
+  position: absolute;
+  inset: -5px;
+  transform: translate3d(1px,2px,-1px);
+  background: conic-gradient(from 90deg at 40% -25%, #e00af8, #e00af8, #c716f8, #743ff6, #743ff6, #743ff6, #3f58f5, #3f58f5, #3f58f5, #743ff6, #743ff6, #743ff6, #c716f8, #c716f8, #e00af8, #e00af8);
+  filter: blur(10px);
 }
 
 .rule {

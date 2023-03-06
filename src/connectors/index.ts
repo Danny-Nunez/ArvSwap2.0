@@ -1,17 +1,23 @@
 import type { Web3Provider } from '@ethersproject/providers'
 import { getPriorityConnector } from '@web3-react/core'
 import { Connector } from '@web3-react/types'
-
 import metaMask, { isMetaMask } from './metaMask'
 import walletConnect, { isWalletConnect } from './walletConnect'
+import walletConnectLogo from '../components/walletconnect.png'
+import metaMaskLogo from '../components/metamask.png'
 
 export type { Web3Connector } from './utils'
 
-export function getConnectorName(connector: Connector): string {
+interface ConnectorInfo {
+  name: string
+  logo: string
+}
+
+export function getConnectorInfo(connector: Connector): ConnectorInfo {
   if (isMetaMask(connector)) {
-    return 'MetaMask'
+    return { name: ' MetaMask', logo: metaMaskLogo }
   } else if (isWalletConnect(connector)) {
-    return 'WalletConnect'
+    return { name: ' WalletConnect', logo: walletConnectLogo }
   } else {
     throw new Error('Unknown Connector')
   }
