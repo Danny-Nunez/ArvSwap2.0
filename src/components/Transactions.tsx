@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styles from '../styles/Home.module.css'
 
 const TOKEN_ADDRESS = '0x28fDA76721a8077A5dE802Ab0212849B8c38429E'
-const API_KEY = 'BJSI8GT581MKCIXWI6VEPE4IC8IQS7IJVSE'
+const API_KEY = process.env.REACT_APP_API_KEY
 
 interface Transaction {
   blockNumber: string
@@ -39,9 +39,7 @@ const Transactions: React.FC = () => {
 
   useEffect(() => {
     const fetchGasPriceUSD = async () => {
-      const response = await fetch(
-        'https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=BJSI8GT581MKCIXWI6VEPE4IC8IQS7IJVS'
-      )
+      const response = await fetch(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${API_KEY}`)
       const data = await response.json()
       setGasPriceUSD(parseFloat(data.result.SafeGasPrice))
     }
@@ -73,7 +71,10 @@ const Transactions: React.FC = () => {
       val /= 1000
       unitIndex++
     }
-    return (val / 1000000).toFixed(val < 1 ? 12 : val < 1000 ? 9 : 8) + ' ' + units[unitIndex]
+    const formattedValue = (val / 1000000).toFixed(val < 1 ? 12 : val < 1000 ? 9 : 8)
+    const hiddenDigits = formattedValue.slice(-6)
+    const visibleDigits = formattedValue.slice(0, -6)
+    return visibleDigits + '...' + ' ' + units[unitIndex]
   }
 
   const renderTransactions = () => {
@@ -85,7 +86,7 @@ const Transactions: React.FC = () => {
               <th>Trans Hash</th>
               <th>From</th>
               <th>To</th>
-              <th>Value</th>
+              <th>Tokens</th>
               {/* <th>Gas Used</th>
               <th>Gas Price</th> */}
             </tr>
