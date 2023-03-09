@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState, useEffect } from 'react'
 import { FiGlobe } from 'react-icons/fi'
 import { SupportedLocale, SUPPORTED_LOCALES, SwapWidget, darkTheme, lightTheme, Theme } from '@uniswap/widgets'
+import Transactions from './Transactions'
 
 // ↓↓↓ Don't forget to import the widgets' fonts! ↓↓↓
 import '@uniswap/widgets/fonts.css'
@@ -13,8 +14,6 @@ import styles from '../styles/Home.module.css'
 import icon1 from './icon1.png'
 import icon2 from './icon2.png'
 
-
-
 // const TOKEN_LIST = 'https://gateway.ipfs.io/ipns/tokens.uniswap.org'
 const TOKEN_LIST = [
   {
@@ -25,37 +24,36 @@ const TOKEN_LIST = [
     chainId: 1,
     logoURI: 'https://artemisvision.io/arvlogo200px.png',
   },
-  {
-    name: 'Tether USD',
-    address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-    symbol: 'USDT',
-    decimals: 6,
-    chainId: 1,
-    logoURI:
-      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png',
-  },
-  {
-    name: 'USD Coin',
-    address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-    symbol: 'USDC',
-    decimals: 6,
-    chainId: 1,
-    logoURI:
-      'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png',
-  },
+  // {
+  //   name: 'Tether USD',
+  //   address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
+  //   symbol: 'USDT',
+  //   decimals: 6,
+  //   chainId: 1,
+  //   logoURI:
+  //     'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png',
+  // },
+  // {
+  //   name: 'USD Coin',
+  //   address: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+  //   symbol: 'USDC',
+  //   decimals: 6,
+  //   chainId: 1,
+  //   logoURI:
+  //     'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png',
+  // },
 ]
 
 const ARV = '0x28fDA76721a8077A5dE802Ab0212849B8c38429E'
 
-
 export default function App() {
   // When a user clicks "Connect your wallet" in the SwapWidget, this callback focuses the connectors.
-  const connectors = useRef<HTMLDivElement>(null);
+  const connectors = useRef<HTMLDivElement>(null)
   const focusConnectors = useCallback(() => connectors.current?.focus(), [])
 
   // The provider to pass to the SwapWidget.
   // This is a Web3Provider (from @ethersproject) supplied by @web3-react; see ./connectors.ts.
-  const provider = useActiveProvider();
+  const provider = useActiveProvider()
 
   // The locale to pass to the SwapWidget.
   // This is a value from the SUPPORTED_LOCALES exported by @uniswap/widgets.
@@ -63,22 +61,25 @@ export default function App() {
   const onSelectLocale = useCallback((e) => setLocale(e.target.value), [])
   const [theme, setTheme] = useState('light')
   const [toggle, setToggle] = useState(false)
-  const [darkMode, setDarkMode] = useState(true);
-  const [connectedWalletAddress, setConnectedWalletAddress] = useState<string | null>(null);
+  const [darkMode, setDarkMode] = useState(true)
+  const [connectedWalletAddress, setConnectedWalletAddress] = useState<string | null>(null)
 
   useEffect(() => {
     if (provider) {
-    provider.getSigner().getAddress().then((address: string) => {
-    setConnectedWalletAddress(address);
-    });
+      provider
+        .getSigner()
+        .getAddress()
+        .then((address: string) => {
+          setConnectedWalletAddress(address)
+        })
     } else {
-    setConnectedWalletAddress(null);
+      setConnectedWalletAddress(null)
     }
-    }, [provider]);
+  }, [provider])
 
   const toggleTheme = () => {
     setToggle(!toggle)
-    setDarkMode(!darkMode);
+    setDarkMode(!darkMode)
     if (theme === 'light') {
       setTheme('dark')
     } else {
@@ -113,9 +114,6 @@ export default function App() {
     interactive: '#191919',
   }
 
-  
-
-
   return (
     <div className={styles.container}>
       <div className={`App ${theme}`}>
@@ -123,7 +121,6 @@ export default function App() {
           <button className="togglebutton" onClick={toggleTheme}>
             {toggle ? <img src={icon1} alt="icon1" /> : <img src={icon2} alt="icon2" />}
           </button>
-          
         </div>
       </div>
       <div className={styles.i18n}>
@@ -149,6 +146,9 @@ export default function App() {
         <div className={styles.demo}>
           <div className={styles.connectors} ref={connectors} tabIndex={-1}>
             <Web3Connectors />
+            <div>
+              {connectedWalletAddress && <div className={styles.walletAddress}>Wallet: {connectedWalletAddress}</div>}
+            </div>
           </div>
           <div className={styles.widget}>
             <SwapWidget
@@ -160,27 +160,14 @@ export default function App() {
               onConnectWallet={focusConnectors}
               defaultInputTokenAddress="NATIVE"
               defaultInputAmount="1"
-              
               defaultOutputTokenAddress={ARV}
             />
           </div>
         </div>
-
-        <div>
-    {connectedWalletAddress && (
-      <div className={styles.walletAddress}>
-        Wallet Address: {connectedWalletAddress}
-      </div>
-    )}
-  </div>
-
       </main>
-      <div>
-      
-     
-     
-     
-    </div>
+      <div className={styles.transactioncontainer}>
+        <Transactions />
+      </div>
     </div>
   )
 }
