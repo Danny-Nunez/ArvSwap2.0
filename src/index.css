@@ -38,6 +38,14 @@ body {
 .walletButton {
   color: #333;
 }
+.transactions th {
+  border-bottom: 1px solid #c108fa;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
 .transactioncontainer {
   justify-content: center;
   align-items: center;

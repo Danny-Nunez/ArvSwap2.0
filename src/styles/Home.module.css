@@ -16,7 +16,7 @@
 }
 .transactions td,
 .transactions th {
-  border-bottom: 0.5px solid #c108fa;
+  border-bottom: 1px solid #c108fa;
   margin: auto;
   justify-content: center;
   text-align: center;
