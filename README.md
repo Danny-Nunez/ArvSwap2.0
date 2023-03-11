@@ -1,4 +1,4 @@
-# Uniswap 2.0
+# Arvswap 2.0
 
 Uniswap 2.0 is a custom frontend widget that uses uniswap liquidity pools and swap mechanism. This ability to use uniswap and have a custom front end is a valuable tool for any crypto project. This was the reason behind this build. You will be able to control the token list with a simple text edit.
 Live Demo 👉 https://uniswap-20.vercel.app/
