@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from '../styles/Home.module.css'
+import loader from './loader.svg'
 
 const TOKEN_ADDRESS = '0x28fDA76721a8077A5dE802Ab0212849B8c38429E'
 const API_KEY = process.env.REACT_APP_API_KEY
@@ -83,10 +84,10 @@ const Transactions: React.FC = () => {
         <table className={styles.transactions}>
           <thead className={styles.tableshell}>
             <tr>
-              <th>Trans Hash</th>
-              <th>From</th>
-              <th>To</th>
-              <th>Tokens</th>
+              <th><span className={styles.tabletitle}>Trans Hash</span></th>
+              <th><span className={styles.tabletitle}>From</span></th>
+              <th><span className={styles.tabletitle}>To</span></th>
+              <th><span className={styles.tabletitle}>Tokens</span></th>
               {/* <th>Gas Used</th>
               <th>Gas Price</th> */}
             </tr>
@@ -152,10 +153,11 @@ const Transactions: React.FC = () => {
 
   return (
     <div className={styles.titleloader}>
-      <h3>Latest Transactions</h3>
+      <h2>Latest Transactions</h2>
       {isLoading ? (
-        <p>Loading transactions...</p>
+       <p><img src={loader} alt="loader" /></p>
       ) : (
+       
         <div>
           {renderTransactions()}
           {renderPagination()}
